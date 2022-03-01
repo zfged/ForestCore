@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Блог";
+    var count = 0;
+}
+
+@model  System.Collections.Generic.IEnumerable<ForestCore.Models.Blog>
+<!--content-->
+<div class="blog">
+    <div class="container">
+        <h1>Blog</h1>
+
+
+        @foreach (var item in Model)
+        {
+            count++;
+            if (count % 2 != 0)
+            {
+                @Html.Raw("<div class='blog-top'>")
+                <div class="col-md-6 grid_3">
+                    <h3><a href="@Url.Action("BlogSingle", "Home", new { id = item.Id }, null)">@item.Name</a></h3>
+                    <a href="blog_single.html"><img src="~/images/@item.Photo" class="img-responsive" alt="" /></a>
+
+                    <div class="blog-poast-info">
+                       
+                    </div>
+                    <p>@item.Description</p>
+                    <div class="button"><a href="@Url.Action("BlogSingle", "Home", new { id = item.Id }, null)">Read More</a></div>
+                </div>
+            }
+
+            else
+            {
+                <div class="col-md-6 grid_3">
+                    <h3><a href="@Url.Action("BlogSingle", "Home", new { id = item.Id }, null)">@item.Name</a></h3>
+                    <a href="blog_single.html"><img src="~/images/@item.Photo" class="img-responsive" alt="" /></a>
+
+                    <div class="blog-poast-info">
+                       
+                    </div>
+                    <p>@item.Description</p>
+                    <div class="button"><a href="@Url.Action("BlogSingle", "Home", new { id = item.Id }, null)">Read More</a></div>
+                </div>
+
+                @Html.Raw("<div class='clearfix'> </div> </div>")
+
+            }
+
+
+        }
+    </div>
+</div>

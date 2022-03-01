@@ -1,0 +1,251 @@
+
+@{
+    ViewData["Title"] = "Admin";
+    Layout = null;
+}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.14.1/css/ui.jqgrid.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.14.1/jquery.jqgrid.min.js"></script>
+<script src="~/lib/jqGrid/js/i18n/grid.locale-ru.js"></script>
+
+<style>
+    .ui-jqgrid .ui-pg-input {
+        height: 20px;
+    }
+
+    .ui-jqgrid .ui-jqgrid-pager {
+        height: 40px;
+    }
+
+        .ui-jqgrid .ui-jqgrid-pager .ui-pg-div {
+            font-size: 14px;
+        }
+</style>
+
+
+<table id="jqg"></table>
+<div id="jpager"></div>
+<script type="text/javascript">
+$(document).ready(function () {
+    $("#jqg").jqGrid({
+        url: '/api/Products/Get/',
+        datatype: "json",
+        colNames: ['Id', 'Название' , 'Заголовок'   , 'Id Категории' , 'Описание' , 'Top' , 'Цена' ],
+        colModel: [
+        { name: 'Id', index: 'Id', width: 30, stype: 'text', key:true },
+        { name: 'Name', index: 'Name', width: 150, editable: true, edittype: 'text', sortable: true },
+        { name: 'Title', index: 'Title', width: 150, editable: true, edittype: 'text', sortable: true },
+
+        { name: 'CategoryId', index: 'CategoryId', width: 150, editable: true, edittype: 'text', sortable: true },
+        { name: 'Description', index: 'Description', width: 150, editable: true, edittype: 'textarea', sortable: true },
+        { name: 'Top', index: 'Top', width: 150, editable: true, edittype: 'checkbox', sortable: true },
+        { name: 'Price', index: 'Price', width: 150, editable: true, edittype: 'text', sortable: true }
+
+        ],
+        rowNum: 10,
+        rowList: [10, 20, 30],
+        width:800,
+        pager: '#jpager',
+        loadonce:true,
+        sortname: 'Id',
+        sortorder: "desc",
+        caption: "Товары"
+    });
+    $("#jqg").jqGrid('navGrid', '#jpager', {
+
+        search: true,
+        searchtext: "Поиск",
+        refresh: false,
+        add: true, // добавление
+        del: true, // удаление
+        edit: true, // редактирование
+        view: true, // просмотр записи
+        viewtext: "Смотреть",
+        viewtitle: "Выбранная запись",
+        addtext: "Добавить",
+        edittext: "Изменить",
+        deltext: "Удалить"
+    },
+    update("edit"), // обновление
+    update("add"), // добавление
+    update("del") // удаление
+    );
+    function update(act) {
+        return {
+            closeAfterAdd: true, // закрыть после добавления
+            height: 250,
+            width: 400,
+            closeAfterEdit: true, // закрыть после редактирования
+            reloadAfterSubmit: true, // обновление
+            drag: true,
+            onclickSubmit: function (params) {
+                var list = $("#jqg");
+                var selectedRow = list.getGridParam("selrow");
+                rowData = list.getRowData(selectedRow);
+                if (act === "add")
+                    params.url = '/api/Products/Add';
+                else if (act === "del")
+                    params.url = '/api/Products/Delete';
+                else if (act === "edit")
+                    params.url = '/api/Products/Edit';
+            },
+            afterSubmit: function (response, postdata) {
+                // обновление грида
+                $(this).jqGrid('setGridParam', { datatype: 'json' }).trigger('reloadGrid')
+                return [true, "", 0]
+            }
+        };
+    };
+});
+</script> 
+
+
+<table id="jqgCat"></table>
+<div id="jpagerCat"></div>
+<script type="text/javascript">
+$(document).ready(function () {
+    $("#jqgCat").jqGrid({
+        url: '/api/Categories/Get/',
+        datatype: "json",
+        colNames: ['Id', 'Название'],
+        colModel: [
+        { name: 'Id', index: 'Id', width: 30, stype: 'text', key:true },
+        { name: 'Name', index: 'Name', width: 150, editable: true, edittype: 'text', sortable: true }
+
+
+        ],
+        rowNum: 10,
+        rowList: [10, 20, 30],
+        width:800,
+        pager: '#jpagerCat',
+        loadonce:true,
+        sortname: 'Id',
+        sortorder: "desc",
+        caption: "Категории"
+    });
+    $("#jqgCat").jqGrid('navGrid', '#jpagerCat', {
+
+        search: true,
+        searchtext: "Поиск",
+        refresh: false,
+        add: true, // добавление
+        del: true, // удаление
+        edit: true, // редактирование
+        view: true, // просмотр записи
+        viewtext: "Смотреть",
+        viewtitle: "Выбранная запись",
+        addtext: "Добавить",
+        edittext: "Изменить",
+        deltext: "Удалить"
+    },
+    update("edit"), // обновление
+    update("add"), // добавление
+    update("del") // удаление
+    );
+    function update(act) {
+        return {
+            closeAfterAdd: true, // закрыть после добавления
+            height: 250,
+            width: 400,
+            closeAfterEdit: true, // закрыть после редактирования
+            reloadAfterSubmit: true, // обновление
+            drag: true,
+            onclickSubmit: function (params) {
+                var list = $("#jqgCat");
+                var selectedRow = list.getGridParam("selrow");
+                rowData = list.getRowData(selectedRow);
+                if (act === "add")
+                    params.url = '/api/Categories/Add';
+                else if (act === "del")
+                    params.url = '/api/Categories/Delete';
+                else if (act === "edit")
+                    params.url = '/api/Categories/Edit';
+            },
+            afterSubmit: function (response, postdata) {
+                // обновление грида
+                $(this).jqGrid('setGridParam', { datatype: 'json' }).trigger('reloadGrid')
+                return [true, "", 0]
+            }
+        };
+    };
+});
+</script> 
+
+
+
+<table id="jqgBlg"></table>
+<div id="jpagerBlg"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#jqgBlg").jqGrid({
+            url: '/api/Blogs/Get/',
+            datatype: "json",
+            colNames: ['Id', 'Название' , 'Текст' , 'Фото'],
+            colModel: [
+                { name: 'Id', index: 'Id', width: 30, stype: 'text', key: true },
+                { name: 'Name', index: 'Name', width: 150, editable: true, edittype: 'text', sortable: true },
+                { name: 'Description', index: 'Description', width: 150, editable: true, edittype: 'textarea', sortable: true },
+                { name: 'imageToUpload', index: 'ImageID', align: 'left', editable: true, edittype: 'file', editoptions: { enctype: "multipart/form-data" }, search: false },
+
+
+            ],
+            rowNum: 10,
+            rowList: [10, 20, 30],
+            width: 800,
+            pager: '#jpagerBlg',
+            loadonce: true,
+            sortname: 'Id',
+            sortorder: "desc",
+            caption: "Блоги"
+        });
+        $("#jqgBlg").jqGrid('navGrid', '#jpagerBlg', {
+
+            search: true,
+            searchtext: "Поиск",
+            refresh: false,
+            add: true, // добавление
+            del: true, // удаление
+            edit: true, // редактирование
+            view: true, // просмотр записи
+            viewtext: "Смотреть",
+            viewtitle: "Выбранная запись",
+            addtext: "Добавить",
+            edittext: "Изменить",
+            deltext: "Удалить"
+        },
+            update("edit"), // обновление
+            update("add"), // добавление
+            update("del") // удаление
+        );
+        function update(act) {
+            return {
+                closeAfterAdd: true, // закрыть после добавления
+                height: 250,
+                width: 400,
+                closeAfterEdit: true, // закрыть после редактирования
+                reloadAfterSubmit: true, // обновление
+                drag: true,
+                onclickSubmit: function (params) {
+                    var list = $("#jqgBlg");
+                    var selectedRow = list.getGridParam("selrow");
+                    rowData = list.getRowData(selectedRow);
+                    if (act === "add")
+                        params.url = '/api/Blogs/Add';
+                    else if (act === "del")
+                        params.url = '/api/Blogs/Delete';
+                    else if (act === "edit")
+                        params.url = '/api/Blogs/Edit';
+                },
+                afterSubmit: function (response, postdata) {
+                    // обновление грида
+                    $(this).jqGrid('setGridParam', { datatype: 'json' }).trigger('reloadGrid')
+                    return [true, "", 0]
+                }
+            };
+        };
+    });
+</script>

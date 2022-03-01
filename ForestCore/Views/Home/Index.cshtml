@@ -1,0 +1,176 @@
+﻿
+@model  System.Collections.Generic.IEnumerable<ForestCore.Models.Product>
+
+@{
+    ViewData["Title"] = "Категории";
+    var count = 0;
+    var countImg = 0;
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/CallMe.css" media="screen" />
+<script type="text/javascript" src="~/js/CallMe.js"></script>
+
+<link rel="stylesheet" type="text/css" href="~/tbForm/datetimepicker-master/jquery.datetimepicker.css" />
+<script src="~/tbForm/datetimepicker-master/jquery.datetimepicker.full.js"></script>
+<script src="~/tbForm/jquery.maskedinput.min.js"></script>
+<link href="~/tbForm/tbForm.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="~/tbForm/tbForm_data.js"></script>
+<script type="text/javascript" src="~/tbForm/jquery.tbForm.min.js"></script>
+
+
+<div class="banner">
+    <div class="container">
+        <script src="~/js/responsiveslides.min.js"></script>
+        <script>
+            $(function () {
+                $("#slider").responsiveSlides({
+                    auto: true,
+                    nav: true,
+                    speed: 500,
+                    namespace: "callbacks",
+                    pager: true,
+                });
+            });
+        </script>
+        <div id="top" class="callbacks_container">
+            <ul class="rslides" id="slider">
+                <li>
+
+                    <div class="banner-text">
+                        <h3>Lorem Ipsum is not simply dummy  </h3>
+                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor .</p>
+                        <a href="single.html">Learn More</a>
+                    </div>
+
+                </li>
+                <li>
+
+                    <div class="banner-text">
+                        <h3>There are many variations </h3>
+                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor .</p>
+                        <a href="single.html">Learn More</a>
+
+                    </div>
+
+                </li>
+                <li>
+                    <div class="banner-text">
+                        <h3>Sed ut perspiciatis unde omnis</h3>
+                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor .</p>
+                        <a href="single.html">Learn More</a>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
+<!--content-->
+<div class="content">
+    <div class="container">
+        <div class="content-top-bottom">
+            <h2>Хит продаж</h2>
+            <div class="col-md-6 men">
+                <a href="single.html" class="b-link-stripe b-animate-go  thickbox">
+                    <img class="img-responsive" src="images/t1.jpg" alt="">
+                    <div class="b-wrapper">
+                        <h3 class="b-animate b-from-top top-in   b-delay03 ">
+                            <span>Герлянда<br>3 метра лампочки красные<br>Производитель Китай </span>
+                        </h3>
+                    </div>
+                </a>
+
+
+            </div>
+            <div class="col-md-6">
+                <div class="col-md1 ">
+                    <a href="single.html" class="b-link-stripe b-animate-go  thickbox">
+                        <img class="img-responsive" src="images/t2.jpg" alt="">
+                        <div class="b-wrapper">
+                            <h3 class="b-animate b-from-top top-in1   b-delay03 ">
+                                <span>Lorem</span>
+                            </h3>
+                        </div>
+                    </a>
+
+                </div>
+                <div class="col-md2">
+                    <div class="col-md-6 men1">
+                        <a href="single.html" class="b-link-stripe b-animate-go  thickbox">
+                            <img class="img-responsive" src="images/t3.jpg" alt="">
+                            <div class="b-wrapper">
+                                <h3 class="b-animate b-from-top top-in2   b-delay03 ">
+                                    <span>Lorem</span>
+                                </h3>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="col-md-6 men2">
+                        <a href="single.html" class="b-link-stripe b-animate-go  thickbox">
+                            <img class="img-responsive" src="images/t4.jpg" alt="">
+                            <div class="b-wrapper">
+                                <h3 class="b-animate b-from-top top-in2   b-delay03 ">
+                                    <span>Lorem</span>
+                                </h3>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+
+        <!----->
+        <div class="content-top">
+            <h1></h1>
+            <div class="grid-in">
+
+                @foreach (var item in Model)
+                {
+
+
+                    <div class="col-md-4 grid-top">
+                        <a href="@Url.Action("Product", "Home", new { id = item.Id })" class="b-link-stripe b-animate-go  thickbox">
+                           
+                                    <img class="img-responsive" src="~/images/@item.MainPhoto" alt="">
+                             
+                            <div class="b-wrapper">
+                                <h3 class="b-animate b-from-left    b-delay03 ">
+                                    <span>@item.Title</span>
+                                </h3>
+                            </div>
+                        </a>
+
+
+                        <p><a href="@Url.Action("Product", "Home", new { id = item.Id })">@item.Name</a></p>
+                    </div>
+                }
+
+
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="tbForm_CallMe" data-tbform="M-1393" style="position:fixed; right: 50px; bottom: 50px;">
+    <div class="tbForm_shadow"></div>
+    <div class="tbForm_fone"><span>Заказать звонок</span></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        $('.tbForm_CallMe').tbForm(); // делаем кнопки активными
+        $('.tbForm').tbForm(); // отображаем раскрытые формы
+    });
+</script>

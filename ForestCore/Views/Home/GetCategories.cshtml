@@ -1,0 +1,11 @@
+
+
+@model  System.Collections.Generic.IEnumerable<ForestCore.Models.Category>
+
+    @foreach (var item in Model)
+    {
+        <li><a href="@Url.Action("CategorySingle", "Home", new { id = item.Id }, null)">@item.Name</a></li>
+    }
+
+    
+   

@@ -1,0 +1,12 @@
+C:\Users\Дима\source\repos\ForestCore\ForestCore\bin\Release\netcoreapp1.1\ForestCore.deps.json
+C:\Users\Дима\source\repos\ForestCore\ForestCore\bin\Release\netcoreapp1.1\ForestCore.runtimeconfig.json
+C:\Users\Дима\source\repos\ForestCore\ForestCore\bin\Release\netcoreapp1.1\ForestCore.runtimeconfig.dev.json
+C:\Users\Дима\source\repos\ForestCore\ForestCore\bin\Release\netcoreapp1.1\ForestCore.dll
+C:\Users\Дима\source\repos\ForestCore\ForestCore\bin\Release\netcoreapp1.1\ForestCore.pdb
+C:\Users\Дима\source\repos\ForestCore\ForestCore\obj\Release\netcoreapp1.1\ForestCore.csprojResolveAssemblyReference.cache
+C:\Users\Дима\source\repos\ForestCore\ForestCore\obj\Release\netcoreapp1.1\ForestCore.csproj.CoreCompileInputs.cache
+C:\Users\Дима\source\repos\ForestCore\ForestCore\obj\Release\netcoreapp1.1\UserSecretsAssemblyInfo.cs
+C:\Users\Дима\source\repos\ForestCore\ForestCore\obj\Release\netcoreapp1.1\ForestCore.AssemblyInfo.cs
+C:\Users\Дима\source\repos\ForestCore\ForestCore\obj\Release\netcoreapp1.1\ForestCore.dll
+C:\Users\Дима\source\repos\ForestCore\ForestCore\obj\Release\netcoreapp1.1\ForestCore.pdb
+C:\Users\Дима\source\repos\ForestCore\ForestCore\obj\Release\netcoreapp1.1\ForestCore.AssemblyInfoInputs.cache
